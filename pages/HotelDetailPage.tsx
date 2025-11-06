@@ -4,7 +4,6 @@ import { Seo } from '../components/Seo';
 import { JsonLd } from '../components/JsonLd';
 import { StarIcon, DollarSignIcon } from '../components/icons';
 import { hotels as allHotels } from '../data/hotels';
-import { DisqusComments } from '../components/DisqusComments';
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   return (
@@ -26,9 +25,6 @@ export const HotelDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   
   const hotel = useMemo(() => allHotels.find(h => h.id === id), [id]);
-
-  // NOTE: Replace this with your own Disqus shortname
-  const disqusShortname = 'bedbug-tracker-demo';
 
   if (!hotel) {
     return (
@@ -122,20 +118,6 @@ export const HotelDetailPage: React.FC = () => {
                 </Link>.
               </p>
             </div>
-          </div>
-          
-          <div className="p-8 border-t border-slate-200 dark:border-slate-700">
-            <h2 className="text-2xl font-bold mb-4">Community Discussion</h2>
-            <p className="text-slate-500 dark:text-slate-400 mb-6">
-              Have you stayed at this hotel recently? Share your experience with the community.
-              Please keep the discussion respectful and relevant to the hotel.
-            </p>
-            <DisqusComments
-              shortname={disqusShortname}
-              url={window.location.href}
-              identifier={hotel.id}
-              title={hotel.name}
-            />
           </div>
         </div>
          <div className="text-center mt-8">
